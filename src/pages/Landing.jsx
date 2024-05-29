@@ -6,10 +6,40 @@ import { FaXTwitter } from "react-icons/fa6";
 import { useState } from "react";
 import PartnerModal from "../components/PartnerModal";
 import RegisterModal from "../components/RegisterModal";
+import toast from "react-hot-toast";
 
 const LandingPage = () => {
   const [showPartner, setShowPartner] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    setLoading(true);
+    const data = new FormData();
+    data.append("Email", email);
+
+    const Sheet_Url =
+      "https://script.google.com/macros/s/AKfycby6yOR5ZYOFRE3TkPOgrcIBNPy0zGg_JoubLxvQLpgV4pILM_bYZP69bgFZzZTLjDdk/exec";
+    try {
+      await fetch(Sheet_Url, {
+        method: "POST",
+        body: data,
+        muteHttpExceptions: true,
+      });
+
+      setEmail("");
+
+      toast.success("Thank you for subscribing.");
+    } catch (error) {
+      toast.error("Could not submit data. Please try again later!");
+      console.log(error);
+    }
+    setLoading(false);
+  }
   return (
     <div className="bg-white flex flex-col items-center w-full">
       <div className="bg-white font-verdana w-full">
@@ -222,15 +252,28 @@ const LandingPage = () => {
                 <p className="font-semibold text-sm">
                   Stay up to date with our latest health events and updates!
                 </p>
-                <div className="gap-4 flex items-center h-12">
+                <form
+                  onSubmit={handleSubmit}
+                  className="gap-4 flex items-center h-12"
+                >
                   <input
+                    type="email"
                     placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                     className="w-3/5 h-full rounded-md placeholder:text-[#667085] placeholder:text-sm border border-[#D0D5DD] px-4"
                   />
-                  <button className="bg-primary text-white py-3 px-5 h-full rounded-md flex items-center font-semibold text-sm">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={`bg-primary text-white py-3 px-5 h-full rounded-md flex items-center font-semibold text-sm ${
+                      loading && "bg-blue-800 cursor-not-allowed"
+                    }`}
+                  >
                     Subscribe
                   </button>
-                </div>
+                </form>
               </div>
               <div className="flex flex-col md:flex-row gap-10 md:gap-16">
                 <div className="flex flex-col gap-4">
