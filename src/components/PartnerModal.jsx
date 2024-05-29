@@ -47,7 +47,7 @@ const PartnerModal = ({ show, setShow }) => {
         <div className="w-full flex justify-end">
           <IoCloseOutline
             onClick={() => setShow(false)}
-            className="text-white size-4"
+            className="text-white size-6"
           />
         </div>
         <div className="flex flex-col gap-4">

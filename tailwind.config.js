@@ -4,6 +4,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        verdana: ["Verdana", "sans-serif"],
+      },
       colors: {
         primary: "#1C53EE",
         secondary: "#1392F3",

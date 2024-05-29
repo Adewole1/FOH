@@ -41,8 +41,8 @@ const LandingPage = () => {
     setLoading(false);
   }
   return (
-    <div className="bg-white flex flex-col items-center w-full">
-      <div className="bg-white font-verdana w-full">
+    <div className="bg-white flex flex-col items-center w-full font-verdana">
+      <div className="bg-white w-full">
         {/* Header */}
         <div className="flex flex-col items-center bg-white px-6 py-10 md:py-5 md:px-8 w-full">
           <div className="flex items-center justify-between w-full max-w-[1440px]">
